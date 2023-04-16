@@ -24,6 +24,14 @@
       {%- for option in product.options_with_values -%}
         <fieldset class="js product-form__input">
           {% if option.name != 'Size' %}
+            {% comment %}
+              Here, I tried to modify the code so that when the pills are selected as a variant picker,
+               when the loop arrives at the 'Size' option,
+               it shoudl render a dropdown insted of the radio buttons.
+               However, there's an error, it was occuring in line 1020 because once I did this
+               it wasn't able to read the value of the variant selected, that also disables the option
+               of the image being displayed to the corresponding color which is a built-in dawn fearure
+            {% endcomment %}
             <legend class="form__label">{{ option.name }}</legend>
             {% render 'product-variant-options', product: product, option: option, block: block %}
           {% else %}
@@ -86,27 +94,22 @@
       {{ block.shopify_attributes }}
     >
       {%- for option in product.options_with_values -%}
-        {% if option.name == 'Color' %}
-          <legend class="form__label">{{ option.name }}</legend>
-          {% render 'product-variant-options', product: product, option: option, block: block %}
-        {% else %}
-          <div class="product-form__input product-form__input--dropdown">
-            <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
-              {{ option.name }}
-            </label>
-            <div class="select">
-              <select
-                id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                class="select__select"
-                name="options[{{ option.name | escape }}]"
-                form="{{ product_form_id }}"
-              >
-                {% render 'product-variant-options', product: product, option: option, block: block %}
-              </select>
-              {% render 'icon-caret' %}
-            </div>
+        <div class="product-form__input product-form__input--dropdown">
+          <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+            {{ option.name }}
+          </label>
+          <div class="select">
+            <select
+              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+              class="select__select"
+              name="options[{{ option.name | escape }}]"
+              form="{{ product_form_id }}"
+            >
+              {% render 'product-variant-options', product: product, option: option, block: block %}
+            </select>
+            {% render 'icon-caret' %}
           </div>
-        {% endif %}
+        </div>
       {%- endfor -%}
 
       <script type="application/json">
