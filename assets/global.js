@@ -828,7 +828,7 @@ class VariantSelects extends HTMLElement {
       this.updateShareUrl();
     }
   }
-
+//Here are dropdowns
   updateOptions() {
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
   }
@@ -1014,13 +1014,26 @@ class VariantRadios extends VariantSelects {
     });
   }
 
-  updateOptions() {
+updateOptions() {
+  const fieldsets = Array.from(this.querySelectorAll('fieldset'));
+  this.options = fieldsets.map((fieldset) => {
+    const radioInput = fieldset.querySelector('input[type="radio"]:checked');
+    const dropdown = fieldset.querySelector('select');
+   
+    const selectedOption = dropdown ? dropdown.value : '';
+    return radioInput ? radioInput.value : selectedOption;
+    
+  });
+}
+
+  
+  /* updateOptions() {
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
     this.options = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
     });
-  }
-}
+  }*/
+} 
 
 customElements.define('variant-radios', VariantRadios);
 

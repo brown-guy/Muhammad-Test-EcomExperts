@@ -63,14 +63,12 @@
           class="disabled"
         {% endif %}
       >
-      <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-        {{ value -}}
+      <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" style="background-color: {{ value }}">
+        &nbsp;
+
         <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
       </label>
     {% else %}
-      {% comment %}
-        And when the size variant comes up, a dropdown is rendered, I copied this code from below
-      {% endcomment %}
       <option
         value="{{ value | escape }}"
         {% if option.selected_value == value %}
@@ -83,6 +81,23 @@
           {{- value -}}
         {%- endif %}
       </option>
+
+      {% comment %}
+          And when the size variant comes up, a dropdown is rendered, I copied this code from below
+
+        <option
+          value="{{ value | escape }}"
+          {% if option.selected_value == value %}
+            selected="selected"
+          {% endif %}
+        >
+          {% if option_disabled -%}
+            {{- 'products.product.value_unavailable' | t: option_value: value -}}
+          {%- else -%}
+            {{- value -}}
+          {%- endif %}
+        </option>
+      {% endcomment %}
     {% endif %}
 
   {%- elsif block.settings.picker_type == 'dropdown' -%}
