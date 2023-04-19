@@ -115,42 +115,7 @@ class CartItems extends HTMLElement {
           document.getElementById(`Drawer-quantity-${line}`);
         const items = document.querySelectorAll(".cart-item");
         //Additional code start
-        // Check if the line item being updated is the one you're interested in
-        console.log(items);
-        const prod = document.querySelector(
-          "a[class='cart-item__name h4 break']"
-        ).innerText;
-        console.log(prod);
-        if (prod === "Handbag" && quantity > 0) {
-          console.log("Inside");
-          console.log(line);
-          // Add the product to the cart automatically
-          // Replace 'PRODUCT_HANDLE' with the handle of the product you want to add
-          const productHandle = "dark-winter-jacket";
-          fetch(`/cart/add.js`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "X-Requested-With": "XMLHttpRequest",
-            },
-            body: JSON.stringify({
-              quantity: 1,
-              id: productHandle,
-            }),
-          })
-            .then((response) => {
-              return response.json();
-            })
-
-            /* .then((data) => {
-              // Update the cart UI and do any additional actions if needed
-              // For example, show a success message, redirect to the cart page, etc.
-            })*/
-            .catch((error) => {
-              console.error(error);
-            });
-        }
-
+       
         //Additional code ended
 
         if (parsedState.errors) {

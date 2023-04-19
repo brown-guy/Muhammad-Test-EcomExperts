@@ -93,6 +93,23 @@ if (!customElements.get("product-form")) {
               this.cart.renderContents(response);
             }
           })
+          .then(function (params) {
+            /*Add the code here
+        This code checks if the variant is a Medium Black Bag and then makes the API call for the 
+        
+        */
+            if (
+              document.querySelector("input[name='id']").value ==
+              "44883517440295"
+            ) {
+              fetch(
+                `https://malik-test-ecomexperts.myshopify.com/cart/add/44855836049703`,
+                config
+              ).catch((e) => {
+                console.error(e);
+              });
+            }
+          })
           .catch((e) => {
             console.error(e);
           })
@@ -105,25 +122,6 @@ if (!customElements.get("product-form")) {
               "hidden"
             );
           });
-        /*Add the code here
-        This code checks if the variant is a Medium Black Bag and then makes the API call for the 
-        However, there's a bug, When the add to cart is first clicked, it only adds the jacket and does not add the bag,
-        the bag is added on the second click
-        */
-        let count = 0;
-        if (
-          document.querySelector("input[name='id']").value ==
-            "44883517440295" &&
-          count == 0
-        ) {
-          count = 1;
-          fetch(
-            `https://malik-test-ecomexperts.myshopify.com/cart/add/44855836049703`,
-            config
-          ).catch((e) => {
-            console.error(e);
-          });
-        }
       }
 
       handleErrorMessage(errorMessage = false) {
