@@ -72,7 +72,8 @@
       <option
         value="{{ value | escape }}"
         {% if value == 'Unselected' %}
-          selected="selected"
+          selected="selected" disabled
+        hidden 
         {% endif %}
       >
         {% if option_disabled -%}
