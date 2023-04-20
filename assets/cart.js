@@ -10,25 +10,38 @@ class CartRemoveButton extends HTMLElement {
       const cartItems =
         this.closest("cart-items") || this.closest("cart-drawer-items");
 
-      
+        
          const check = document.querySelector(`#CartItem-${this.dataset.index} a`).href; //This line extracts the href of the Medium Black Handbag
 /*
 Then the if statement checks if the item being deleted is the Medium Black Handbag
 It the select the line number at which the Jacket is present
 After that the Asynchronous function deleteJacket() is called and waits till the Jacket has been deleted
 The rest of the code is carried out as it is
-*/
-      if(check == 'https://malik-test-ecomexperts.myshopify.com/products/black-leather-bag?variant=44883517440295'){
-       const jacket = document.querySelector(".cart-item__details a[href*='44855836049703']").parentElement.parentElement.id[9];
-        
-      deleteJacket(parseInt(jacket));
-      } 
+*/  
+
       
+        
+     
       cartItems.updateQuantity(this.dataset.index, 0);
+ 
+       if(check === 'https://malik-test-ecomexperts.myshopify.com/products/black-leather-bag?variant=44883517440295'){
+           try{
+       var jacket = document.querySelector(".cart-item__details a[href*='44855836049703']").parentElement.parentElement.id[9];
+           }
+           catch(e){
+             console.log(e);
+           }
+        setTimeout(()=>deleteJacket(jacket),1000)
+          
+      
+           
+      }
       
       //Async function definition
-      async function deleteJacket(index){
-        await cartItems.updateQuantity(index, 0);
+    async function deleteJacket(index){
+     
+        cartItems.updateQuantity(index, 0);
+      return;
       }
     });
   }
