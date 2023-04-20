@@ -71,7 +71,7 @@
     {% else %}
       <option
         value="{{ value | escape }}"
-        {% if option.selected_value == value %}
+        {% if value == 'Unselected' %}
           selected="selected"
         {% endif %}
       >
@@ -82,22 +82,7 @@
         {%- endif %}
       </option>
 
-      {% comment %}
-          And when the size variant comes up, a dropdown is rendered, I copied this code from below
 
-        <option
-          value="{{ value | escape }}"
-          {% if option.selected_value == value %}
-            selected="selected"
-          {% endif %}
-        >
-          {% if option_disabled -%}
-            {{- 'products.product.value_unavailable' | t: option_value: value -}}
-          {%- else -%}
-            {{- value -}}
-          {%- endif %}
-        </option>
-      {% endcomment %}
     {% endif %}
 
   {%- elsif block.settings.picker_type == 'dropdown' -%}
