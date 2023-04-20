@@ -71,10 +71,6 @@
     {% else %}
       <option
         value="{{ value | escape }}"
-        {% if value == 'Unselected' %}
-          selected="selected" disabled
-        hidden 
-        {% endif %}
       >
         {% if option_disabled -%}
           {{- 'products.product.value_unavailable' | t: option_value: value -}}
@@ -82,8 +78,6 @@
           {{- value -}}
         {%- endif %}
       </option>
-
-
     {% endif %}
 
   {%- elsif block.settings.picker_type == 'dropdown' -%}
