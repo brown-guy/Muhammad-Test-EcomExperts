@@ -95,7 +95,10 @@ if (!customElements.get("product-form")) {
           })
           .then(function (params) {
             /*Add the code here
-        This code checks if the variant is a Medium Black Bag and then makes the API call for the 
+        This code checks if the variant is a Medium Black Bag and then makes the API call for the Jacket
+        The soft winter jacket is hidden using a metafield called 'hide' with namespace and key 'seo.hidden' but this hides it from search only
+        To hide it from the collections, I overwrote the default 'all' collection and excluded the soft winter jacket from this collection
+        I made a discount using the 'buy x get y' discount 
         
         */
             if (

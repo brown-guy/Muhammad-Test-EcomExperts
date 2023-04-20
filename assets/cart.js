@@ -1,13 +1,35 @@
+
 class CartRemoveButton extends HTMLElement {
   constructor() {
     super();
-
+//This is the event listener for the remove button
     this.addEventListener("click", (event) => {
+    
       event.preventDefault();
-      console.log(event);
+      
       const cartItems =
         this.closest("cart-items") || this.closest("cart-drawer-items");
+
+      
+         const check = document.querySelector(`#CartItem-${this.dataset.index} a`).href; //This line extracts the href of the Medium Black Handbag
+/*
+Then the if statement checks if the item being deleted is the Medium Black Handbag
+It the select the line number at which the Jacket is present
+After that the Asynchronous function deleteJacket() is called and waits till the Jacket has been deleted
+The rest of the code is carried out as it is
+*/
+      if(check == 'https://malik-test-ecomexperts.myshopify.com/products/black-leather-bag?variant=44883517440295'){
+       const jacket = document.querySelector(".cart-item__details a[href*='44855836049703']").parentElement.parentElement.id[9];
+        
+      deleteJacket(parseInt(jacket));
+      } 
+      
       cartItems.updateQuantity(this.dataset.index, 0);
+      
+      //Async function definition
+      async function deleteJacket(index){
+        await cartItems.updateQuantity(index, 0);
+      }
     });
   }
 }
@@ -103,9 +125,10 @@ class CartItems extends HTMLElement {
       sections: this.getSectionsToRender().map((section) => section.section),
       sections_url: window.location.pathname,
     });
-
+    
     fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
       .then((response) => {
+        
         return response.text();
       })
       .then((state) => {
@@ -113,10 +136,7 @@ class CartItems extends HTMLElement {
         const quantityElement =
           document.getElementById(`Quantity-${line}`) ||
           document.getElementById(`Drawer-quantity-${line}`);
-        const items = document.querySelectorAll(".cart-item");
-        //Additional code start
        
-        //Additional code ended
 
         if (parsedState.errors) {
           quantityElement.value = quantityElement.getAttribute("value");
@@ -189,6 +209,7 @@ class CartItems extends HTMLElement {
         }
         publish(PUB_SUB_EVENTS.cartUpdate, { source: "cart-items" });
       })
+        
       .catch(() => {
         this.querySelectorAll(".loading-overlay").forEach((overlay) =>
           overlay.classList.add("hidden")
@@ -198,6 +219,7 @@ class CartItems extends HTMLElement {
           document.getElementById("CartDrawer-CartErrors");
         errors.textContent = window.cartStrings.error;
       })
+     
       .finally(() => {
         this.disableLoading(line);
       });

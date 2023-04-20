@@ -1015,6 +1015,10 @@ class VariantRadios extends VariantSelects {
   }
 
 updateOptions() {
+  /* 
+  I edited this function to extract the value of the variant selected, by default it only reads the value of radio inputs
+  Now it checks to see if there is a select input or a radio input and maps it.
+  */
   const fieldsets = Array.from(this.querySelectorAll('fieldset'));
   this.options = fieldsets.map((fieldset) => {
     const radioInput = fieldset.querySelector('input[type="radio"]:checked');
@@ -1027,12 +1031,7 @@ updateOptions() {
 }
 
   
-  /* updateOptions() {
-    const fieldsets = Array.from(this.querySelectorAll('fieldset'));
-    this.options = fieldsets.map((fieldset) => {
-      return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
-    });
-  }*/
+
 } 
 
 customElements.define('variant-radios', VariantRadios);
