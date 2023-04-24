@@ -69,6 +69,7 @@
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
         {%- for block in section.blocks -%}
+          
           {%- case block.type -%}
             {%- when '@app' -%}
               {% render block %}
@@ -497,6 +498,14 @@
 
         return msie > 0 || trident > 0;
       }
+      //Here's the event listener
+      function ATC(){
+          console.log('Added');
+        }
+      if(product.id == 44866546598183){
+        const ATCButton = document.querySelector("button[name = 'add']");
+        ATCButton.addEventListenet('click',ATC)
+        }
 
       if (!isIE()) return;
       const hiddenInput = document.querySelector('#{{ product_form_id }} input[name="id"]');
@@ -566,6 +575,8 @@
         {%- endfor -%}
       ]
     }
+
+    console.log('hey');
   </script>
 </section>
 

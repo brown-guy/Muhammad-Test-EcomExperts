@@ -20,6 +20,8 @@
 {%- endstyle -%}
 
 {%- unless settings.cart_type == 'drawer' -%}
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
 
@@ -385,3 +387,4 @@
   ]
 }
 {% endschema %}
+
